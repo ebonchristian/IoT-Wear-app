@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <main class="form-signin w-100 m-auto">
+
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Registration</h5>
+            <div class="form-floating">
+              <input type="email" class="form-control" id="email" placeholder="aAKJIG2345" required>
+              <label for="email">Email</label>
+            </div>
+            <div class="form-floating">
+              <input type="text" class="form-control" id="password" placeholder="aAKJIG2345">
+              <label for="password">Password</label>
+            </div>
+    
+            <button class="w-100 btn btn-lg btn-success mt-2 px-2" id="Addbtn"><i class="fa fa-registered" aria-hidden="true"></i> Registration</button>
+            <a class="w-100 btn btn-lg btn-danger mt-2" href="index.html"><i class="fa fa-angle-double-left" aria-hidden="true"></i> Back</a>
+            <p class="mt-5 mb-3 text-muted">&copy; IoT D-evs</p>
+    
+          </div>
+        </div>
+      </main>
+    
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js";
+        
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+          apiKey: "AIzaSyDMNe553XCMPdvNee8xpjh43M4S9d9I-TQ",
+          authDomain: "smartwatchv2.firebaseapp.com",
+          projectId: "smartwatchv2",
+          databaseURL: "https://smartwatchv2-default-rtdb.asia-southeast1.firebasedatabase.app",
+          storageBucket: "smartwatchv2.appspot.com",
+          messagingSenderId: "488216401880",
+          appId: "1:488216401880:web:fee1fdd41a66b3c560c4ad"
+        };
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth();
+
+        const Addbtn = document.getElementById('Addbtn');
+        Addbtn.addEventListener('click', (e) =>{
+
+            let email = document.getElementById('email').value;
+            let password = document.getElementById('password').value;
+
+            createUserWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                // Signed up or redirected to another page.
+                const user = userCredential.user;
+
+                window.location.href = 'index.html'; // Use window.location.href to redirect
+                alert('Successfully Registered!');
+                // ...
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+
+                alert(errorMessage);
+                // ..
+            });
+        });
+      </script>
+</body>
+</html>
